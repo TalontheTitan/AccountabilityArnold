@@ -2,9 +2,10 @@ import logging
 from telegram import *
 from telegram.ext import *
 import Responses
+import config
 
 
-API_KEY = '5070333107:AAFtLhrha-gYobdXQY52ye0jrNchlMoJu7A'
+API_KEY = "Api_Key"
 
 #set up the logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -32,7 +33,8 @@ def Checkin(update, context):
     Dispatcher.add_handler(checkin_handler)
     updater.start_polling()
 
-def checkintimer(bot, )
+def checkintimer(bot,job_queue, update):
+    job_queue.run_repeating(Checkin(), 5, context=bot.send_message(chat_id=update.effective_chat.id))
 
 
 def handle_message(update, context):
